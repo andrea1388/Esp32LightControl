@@ -27,3 +27,14 @@ void Otafw::Check()
         ESP_LOGI(TAG, "Otafw::Check err=%s",esp_err_to_name(ret));
     }
 }
+
+inline void otaSetup() {
+
+    param.load("otaurl",&otaurl);
+    if(otaurl) 
+    {
+        otafw.Init(otaurl,(const char*)ca_crt_start);
+        xTaskCreate(&Ota, "ota_task", 8192, NULL, 5, NULL);
+        ESP_LOGI(TAG,"Ota started");
+    }
+}
