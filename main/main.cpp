@@ -139,7 +139,7 @@ void app_main(void)
 
     Switch stairlight;
     stairlight.mqtt = mqtt;
-    stairlight.input = stairpushbutton;
+    stairlight.input = &stairpushbutton;
 
     // srand((unsigned int)esp_timer_get_time());
     event_group = xEventGroupCreate();

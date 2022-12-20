@@ -1,4 +1,6 @@
+#include "driver/gpio.h"
 #include "BinarySensor.h"
+
 BinarySensor::BinarySensor() {
     debounceTime=50;
 }
@@ -22,9 +24,3 @@ inline bool BinarySensor::debouceTimeElapsed() {
     return((now-tLastReading)>debounceTime);
 }
 
-void BinarySensor::publish() {
-    char msg[4];
-    if(!mqtt) return;
-    if(state) strcpy(msg,"ON"); else strcpy(msg,"OFF");
-    mqtt.Publish(mqttStateTopic,msg); 
-}

@@ -1,7 +1,11 @@
+#include "driver/gpio.h"
 #include "mqtt.h"
-class Switch {
-    mqtt *mqtt;
+#include "BinarySensor.h"
+#include "Base.h"
+
+class Switch:Base {
     BinarySensor *input;
-    void run();
+    uint8_t onTime;
+    bool toggleMode;
 }
 
