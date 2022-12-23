@@ -157,14 +157,17 @@ void app_main(void)
 
     publishStatus();
 
+
     while (true)
     {
         now = (esp_timer_get_time() / 1000);
         ProcessStdin();
-        stairpushbutton.run();
-        stairlight.run();
-        doorsensor.run();
-        blindsensor.run();
+        stairpushbutton.run(gpio_get_level(pin));
+        stairlight.run(stairpushbutton.value);
+        doorsensor.run(gpio_get_level(pin));
+        blindsensor.run(gpio_get_level(pin));
+
+
         vTaskDelay(1);
     }
 }
